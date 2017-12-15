@@ -1,0 +1,63 @@
+{
+  "actions": [
+    {
+     "name": "MAIN",
+     "intent": {
+       "name": "actions.intent.MAIN"
+     },
+     "fulfillment": {
+       "conversationName": "echoApp"
+     }
+    },
+    {
+      "name": "direct",
+      "intent": {
+        "name": "echo.intent.DIRECT",
+        "parameters": [{
+          "name": "number",
+          "type": "SchemaOrg_Number"
+        }],
+        "trigger": {
+          "queryPatterns": [
+            "echo this number $SchemaOrg_Number:number",
+            "repeat this number $SchemaOrg_Number:number"
+          ]
+        }
+      },
+      "fulfillment": {
+        "conversationName": "echoApp"
+      }
+    },
+    {
+      "name": "indirect",
+      "intent": {
+        "name": "echo.intent.INDIRECT",
+        "trigger": {
+          "queryPatterns": [
+            "echo please",
+            "repeat please"
+          ]
+        }
+      },
+      "fulfillment": {
+        "conversationName": "echoApp"
+      }
+    },
+    {
+      "name": "indirect_response",
+      "intent": {
+        "name": "actions.intent.TEXT"
+      },
+      "fulfillment": {
+        "conversationName": "echoApp"
+      }
+    }
+  ],
+  "conversations": {
+    "echoApp": {
+      "name": "echoApp",
+      "url": "https://us-central1-test-817d8.cloudfunctions.net/echoApp",
+      "fulfillmentApiVersion": 2
+    }
+  }
+}
